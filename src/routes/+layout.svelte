@@ -1,6 +1,7 @@
 <script lang="ts">
   import Socials from '$lib/socials.svelte';
   import { currentTheme, themeClass, themes, themeSettings } from '$lib/theme';
+  import Background from '$lib/components/Background.svelte';
 
   import Header from './Header.svelte';
   import ThemeWarp from './ThemeWarp.svelte';
@@ -21,19 +22,21 @@
 <div class="app">
   <ThemeWarp />
   <div
-    class={themes[$currentTheme].class}
+    class="wrapper {themes[$currentTheme].class}"
     style="--header-font: {headerFont}; --body-font: {bodyFont}; --theme-card-background: {cardBackground}; --theme-hover-bg-color: {hoverBgColor};"
   >
-    <Header />
+    <Background>
+      <Header />
 
-    <main>
-      <slot />
-    </main>
+      <main>
+        <slot />
+      </main>
 
-    <footer>
-      <Socials />
-      <p class="copyright">© 2022 Thom van Kalkeren</p>
-    </footer>
+      <footer>
+        <Socials />
+        <p class="copyright">© 2022 Thom van Kalkeren</p>
+      </footer>
+    </Background>
   </div>
 </div>
 
@@ -45,6 +48,12 @@
 
     position: absolute;
     width: 100%;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
   }
 
   main {
