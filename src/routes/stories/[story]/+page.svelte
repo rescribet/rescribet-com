@@ -38,5 +38,6 @@
   :global(.paper) {
     max-width: 70ch;
     min-height: 10em;
+    width: min(70ch, 100%);
   }
 </style>
