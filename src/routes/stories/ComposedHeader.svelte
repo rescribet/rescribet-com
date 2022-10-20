@@ -40,6 +40,7 @@
 
   .sup {
     height: 1.2em;
+    font-family: var(--body-font);
   }
 
   h1 {
