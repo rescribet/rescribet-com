@@ -1,63 +1,87 @@
 <script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+  import logo from '$lib/themes/w95/logo.png';
+  import { currentTheme } from '$lib/theme';
+
+  import SkillCategory from './SkillCategory.svelte';
+  import { skillsList } from './+page';
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+  <title>Home</title>
+  <meta name="description" content="Svelte demo app" />
 </svelte:head>
 
 <section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
+  <div class="hero">
+    {#if $currentTheme == 'W95'}
+      <h1>
+        <img src={logo} alt="Rescribet" />
+      </h1>
+    {:else}
+      <h1>Rescribet</h1>
+      <p class="subheader">writing is rewriting</p>
+    {/if}
+  </div>
 
-		to your new<br />SvelteKit app
-	</h1>
+  <div class="skills">
+    <h2>{skillsList.name}</h2>
 
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
-	<Counter />
-
-	<p>But who wants to type their headers by hand???</p>
-
-	<p>How fast is this really?</p>
+    <div class="skillsList">
+      {#each skillsList.categories as category}
+        <SkillCategory record={category} />
+      {/each}
+    </div>
+  </div>
 </section>
 
 <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
+  section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 0.6;
+  }
 
-	h1 {
-		width: 100%;
-	}
+  h1 {
+    font-size: 10em;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    margin-block-end: 0.2rem;
+    width: 100%;
+    margin-bottom: 6rem;
+  }
 
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
+  .subheader {
+    font-size: 4em;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    text-align: center;
+    margin-bottom: 3em;
+    width: 100%;
+  }
 
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
+  .skills {
+    display: flex;
+    flex: 0.6;
+    flex-direction: column;
+    max-width: 48rem;
+    width: 100%;
+  }
+
+  .skills h2 {
+    font-size: 2em;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+  }
+
+  .skillsList {
+    display: grid;
+    gap: 0.5em;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  /* :global(.Bootstrap) .hero {
+    background-color: slateblue;
+    color: white;
+    width: 98vw;
+    overflow: hidden;
+  } */
 </style>

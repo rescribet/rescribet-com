@@ -1,33 +1,77 @@
 @import '@fontsource/fira-mono';
+@import './reset.css';
+@import './scrollbars.css';
+
+@font-face {
+	font-family: w95;
+	src: url('/themes/w95/font.woff2') format('woff2'),
+		 url('/themes/w95/font.ttf') format('ttf');
+	 font-weight: normal;
+	 font-style: normal;
+	 font-display: swap;
+}
+
+@font-face {
+	font-family: sticker;
+	src: url('/themes/sticker/font.woff2') format('woff2'),
+		 url('/themes/sticker/font.woff') format('woff'),
+		 url('/themes/sticker/font.ttf') format('ttf');
+	 font-weight: normal;
+	 font-style: normal;
+	 font-display: swap;
+}
 
 :root {
-	--font-body: Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+	--body-font: Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
 		Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	--font-mono: 'Fira Mono', monospace;
-	--color-bg-0: rgb(202, 216, 228);
-	--color-bg-1: hsl(209, 36%, 86%);
-	--color-bg-2: hsl(224, 44%, 95%);
-	--color-theme-1: #ff3e00;
-	--color-theme-2: #40b3ff;
+	/* --color-bg-0: hsl(45deg 40% 84%); */
+	/* --color-bg-1: hsl(45deg 40% 84%); */
+	/* --color-bg-2: hsl(224, 44%, 95%); */
+	--color-bg-0: hsl(205deg 51% 69%);
+	--color-bg-1: hsl(180deg 71% 30%);
+	--color-bg-2: hsl(205deg 51% 69%);
+	--color-theme-1: #05668D;
+	--color-theme-2: hsl(187, 97%, 29%);
+	--color-theme-3: #9D5C63;
+	--color-theme-4: #628B48;
+	--color-theme-5: #cac5c5;
 	--color-text: rgba(0, 0, 0, 0.7);
 	--column-width: 42rem;
 	--column-margin-top: 4rem;
-	font-family: var(--font-body);
+	font-family: var(--body-font);
 	color: var(--color-text);
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: .7em;
+  font-family: var(--header-font);
+}
+
+app {
+  font-family: var(--body-font);
+}
+
 body {
+	scrollbar-gutter: stable both-edges;
+	overflow-y: scroll;
 	min-height: 100vh;
 	margin: 0;
 	background-attachment: fixed;
-	background-color: var(--color-bg-1);
 	background-size: 100vw 100vh;
-	background-image: radial-gradient(
-			50% 50% at 50% 50%,
-			rgba(255, 255, 255, 0.75) 0%,
-			rgba(255, 255, 255, 0) 100%
-		),
-		linear-gradient(180deg, var(--color-bg-0) 0%, var(--color-bg-1) 15%, var(--color-bg-2) 50%);
+}
+
+.W95-theme body {
+  background-color: var(--color-bg-1);
+}
+
+.Sticker-theme body {
+  background-color: white;
+}
+
+.W95-theme *:focus {
+  outline-style: dotted;
+  outline-color: grey;
 }
 
 h1,
@@ -76,6 +120,10 @@ pre {
 	flex-direction: column;
 	justify-content: center;
 	margin: 0 auto;
+}
+
+.Sticker .text-column {
+  max-width: 65rem;
 }
 
 input,

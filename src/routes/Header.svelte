@@ -1,129 +1,177 @@
-<script>
-	import { page } from '$app/stores';
-	import logo from '$lib/images/svelte-logo.svg';
-	import github from '$lib/images/github.svg';
+<script lang="ts">
+  import { page } from '$app/stores';
+  import Socials from '$lib/socials.svelte';
+  import { currentTheme, themeClass } from '$lib/theme';
+
+  import { stories } from '$lib/stories';
+
+  let pop: HTMLAudioElement;
+
+  const playPop = (_: unknown) => {
+    if ($currentTheme === 'W95') {
+      pop.play();
+    }
+  };
 </script>
 
 <header>
-	<div class="corner">
-		<a href="https://kit.svelte.dev">
-			<img src={logo} alt="SvelteKit" />
-		</a>
-	</div>
+  <nav>
+    <ul>
+      <li class:active={$page.url.pathname === '/'}>
+        <a on:click={playPop} href="/">Home</a>
+      </li>
+      <li class:active={$page.url.pathname.startsWith(stories._id)}>
+        <a on:click={playPop} href={stories._id}>{stories.name}</a>
+      </li>
+    </ul>
+  </nav>
 
-	<nav>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
-		</svg>
-		<ul>
-			<li class:active={$page.url.pathname === '/'}>
-				<a href="/">Home</a>
-			</li>
-			<li class:active={$page.url.pathname === '/about'}>
-				<a href="/about">About</a>
-			</li>
-			<li class:active={$page.url.pathname.startsWith('/sverdle')}>
-				<a href="/sverdle">Sverdle</a>
-			</li>
-		</ul>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
-		</svg>
-	</nav>
-
-	<div class="corner">
-		<a href="https://github.com/sveltejs/kit">
-			<img src={github} alt="GitHub" />
-		</a>
-	</div>
+  <div class="corner">
+    <Socials />
+  </div>
 </header>
 
-<style>
-	header {
-		display: flex;
-		justify-content: space-between;
-	}
+<audio src="/themes/{themeClass($currentTheme).toLowerCase()}/tab-switch.mp3" bind:this={pop} />
 
-	.corner {
-		width: 3em;
-		height: 3em;
-	}
+<style lang="scss">
+  @import '../lib/components/button.scss';
 
-	.corner a {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
-	}
+  header {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    justify-content: space-between;
+    padding: 0 2em;
 
-	.corner img {
-		width: 2em;
-		height: 2em;
-		object-fit: contain;
-	}
+    :global(.W95) & {
+      background-color: #c0c0c0;
+      box-shadow: -2px -2px darkgrey inset, 1px 1px white inset;
+      padding: 0 0.2em 0 2em;
+    }
+  }
 
-	nav {
-		display: flex;
-		justify-content: center;
-		--background: rgba(255, 255, 255, 0.7);
-	}
+  :global(.W95) .corner {
+    padding: 0.3em;
+    margin: 0.1em 0;
+    border: 3px grey inset;
+  }
 
-	svg {
-		width: 2em;
-		height: 3em;
-		display: block;
-	}
+  .corner:last-of-type {
+    justify-self: end;
+  }
 
-	path {
-		fill: var(--background);
-	}
+  nav {
+    display: flex;
+    justify-content: center;
+    /* --background: rgba(255, 255, 255, 0.7); */
+  }
 
-	ul {
-		position: relative;
-		padding: 0;
-		margin: 0;
-		height: 3em;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		list-style: none;
-		background: var(--background);
-		background-size: contain;
-	}
+  ul {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    height: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    background: var(--background);
+    background-size: contain;
+  }
 
-	li {
-		position: relative;
-		height: 100%;
-	}
+  li {
+    position: relative;
+    height: 100%;
 
-	li.active::before {
-		--size: 6px;
-		content: '';
-		width: 0;
-		height: 0;
-		position: absolute;
-		top: 0;
-		left: calc(50% - var(--size));
-		border: var(--size) solid transparent;
-		border-top: var(--size) solid var(--color-theme-1);
-	}
+    :global(.Sticker) &,
+    :global(.Sticker) & a {
+      border-radius: 0.91em;
+    }
 
-	nav a {
-		display: flex;
-		height: 100%;
-		align-items: center;
-		padding: 0 0.5rem;
-		color: var(--color-text);
-		font-weight: 700;
-		font-size: 0.8rem;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		text-decoration: none;
-		transition: color 0.2s linear;
-	}
+    :global(.Sticker) &:hover::before {
+      background: repeating-linear-gradient(
+        -45deg,
+        #248d83,
+        #248d83 10px,
+        #236f68 10px,
+        #236f68 20px
+      );
+      animation: scroll linear 20s infinite forwards;
+      background-size: 800% 100%;
+      content: '';
+      width: 98%;
+      position: absolute;
+      bottom: 0;
+      height: 7px;
+    }
 
-	a:hover {
-		color: var(--color-theme-1);
-	}
+    :global(.W95) &:hover a,
+    :global(.Boostrap) &:hover a {
+      background-color: var(--theme-hover-bg-color);
+      color: white;
+    }
+  }
+
+  :global(.Sticker) li.active::before {
+    background: repeating-linear-gradient(
+      -45deg,
+      #248d83,
+      #248d83 10px,
+      #236f68 10px,
+      #236f68 20px
+    );
+    background-size: 800% 100%;
+    content: '';
+    width: 98%;
+    position: absolute;
+    bottom: 0;
+    height: 7px;
+    animation-fill-mode: forwards;
+  }
+
+  :global(.Bootstrap) li.active::before {
+    --size: 6px;
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 0;
+    left: calc(50% - var(--size));
+    border: var(--size) solid transparent;
+    border-top: var(--size) solid var(--color-theme-1);
+  }
+
+  :global(.W95) li.active {
+    a {
+      border: 3px darkgrey inset;
+      background-color: darkgrey;
+    }
+  }
+
+  nav a {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding: 0 0.5rem;
+    color: var(--color-text);
+    font-weight: 400;
+    font-size: 1.4rem;
+    font-family: var(--header-font);
+    /* letter-spacing: 0.1em; */
+    text-decoration: none;
+
+    :global(.Bootstrap) &,
+    :global(.Sticker) & {
+      transition: color 0.2s linear;
+    }
+
+    :global(.W95) & {
+      font-size: 0.7rem;
+    }
+  }
+
+  :global(.W95) a:hover,
+  :global(.Bootstrap) a:hover {
+    color: var(--color-theme-1);
+  }
 </style>
