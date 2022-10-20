@@ -34,7 +34,7 @@
   </div>
 </section>
 
-<style>
+<style lang="scss">
   section {
     display: flex;
     flex-direction: column;
@@ -69,7 +69,10 @@
 
   .skills h2 {
     font-size: 2em;
-    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+
+    :global(.W95) & {
+      color: white;
+    }
   }
 
   .skillsList {
