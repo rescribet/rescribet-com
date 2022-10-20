@@ -41,6 +41,10 @@
   .sup {
     height: 1.2em;
     font-family: var(--body-font);
+
+    :global(.W95) & {
+      display: none;
+    }
   }
 
   h1 {
