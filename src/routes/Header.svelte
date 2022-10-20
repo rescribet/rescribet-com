@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import Socials from '$lib/socials.svelte';
-  import { currentTheme, themeClass } from '$lib/theme';
+  import { currentTheme, themeClass, Themes } from '$lib/theme';
 
   import { stories } from '$lib/stories';
 
@@ -31,7 +31,9 @@
   </div>
 </header>
 
-<audio src="/themes/{themeClass($currentTheme).toLowerCase()}/tab-switch.mp3" bind:this={pop} />
+{#if $currentTheme === Themes.W95}
+  <audio src="/themes/{themeClass($currentTheme).toLowerCase()}/tab-switch.mp3" bind:this={pop} />
+{/if}
 
 <style lang="scss">
   @import '../lib/components/button.scss';
