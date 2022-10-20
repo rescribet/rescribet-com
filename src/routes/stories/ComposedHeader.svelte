@@ -18,7 +18,6 @@
   <div />
   <div class="container">
     <p class="sup" in:fade={{ duration }} out:fade={{ duration }}>{sup}</p>
-    <!-- <H1><slot /></H1> -->
     <h1 in:fade={{ duration }} out:fade={{ duration }}>
       <slot />
     </h1>

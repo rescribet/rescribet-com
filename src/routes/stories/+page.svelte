@@ -11,7 +11,6 @@
 </svelte:head>
 
 <div>
-  <!-- <H1>{record.name}</H1> -->
   <ComposedHeader sup="">
     {record.name}
   </ComposedHeader>
