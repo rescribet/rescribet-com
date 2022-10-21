@@ -10,6 +10,7 @@ export interface Theme {
     bodyFont: string;
     cardBackground: string;
     hoverBgColor: string;
+    themeColor: string;
   };
 }
 
@@ -28,6 +29,7 @@ export const themes = {
       bodyFont: "'courier', 'courier new', monospace",
       cardBackground: '#cac5c5',
       hoverBgColor: 'rgb(0 0 128)',
+      themeColor: 'hsl(180deg 71% 30%)',
     },
   },
   [Themes.Bootstrap]: {
@@ -38,16 +40,18 @@ export const themes = {
       bodyFont: 'unset',
       cardBackground: '#fffdfd',
       hoverBgColor: '#c2c2c2',
+      themeColor: '#f4bbd1',
     },
   },
   [Themes.Sticker]: {
     class: Themes.Sticker,
-    name: 'Current Year',
+    name: 'Sticker',
     settings: {
       headerFont: "'sticker', arial",
       bodyFont: 'unset',
       cardBackground: '#fffae5',
       hoverBgColor: '#c2c2c2',
+      themeColor: '#248d83',
     },
   },
 } as Record<ThemeNames, Theme>;

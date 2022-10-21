@@ -1,11 +1,17 @@
 <script lang="ts">
   import Paper from '$lib/components/Paper.svelte';
+  import Metadata from '$lib/Metadata.svelte';
+
   import ComposedHeader from '../ComposedHeader.svelte';
 
   import type { PageData } from './$types';
 
   export let data: PageData;
 </script>
+
+<svelte:head>
+  <Metadata title="{data.name}, a story" path={data._id} description={data.text} />
+</svelte:head>
 
 <article>
   <div class="header-container">

@@ -3,11 +3,15 @@
   import { stories as record } from '$lib/stories';
 
   import ComposedHeader from './ComposedHeader.svelte';
+  import Metadata from '$lib/Metadata.svelte';
 </script>
 
 <svelte:head>
-  <title>{record.name}</title>
-  <meta name="description" content="My Stories" />
+  <Metadata
+    title={record.name}
+    path={record._id}
+    description="Stories about projects and technologies I've worked on."
+  />
 </svelte:head>
 
 <div>

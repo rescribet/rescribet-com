@@ -1,24 +1,30 @@
 <script>
-  import logo from '$lib/themes/w95/logo.png';
-  import { currentTheme } from '$lib/theme';
+  import Metadata from '$lib/Metadata.svelte';
+  import logoW95 from '$lib/themes/w95/logo_wide.png';
+  import logoSicker from '$lib/themes/sticker/logo_wide.svg';
+  import { currentTheme, Themes } from '$lib/theme';
 
   import SkillCategory from './SkillCategory.svelte';
   import { skillsList } from './+page';
 </script>
 
 <svelte:head>
-  <title>Home</title>
-  <meta name="description" content="Svelte demo app" />
+  <Metadata title="Home" path="/" description="Online resume" />
 </svelte:head>
 
 <section>
   <div class="hero">
-    {#if $currentTheme == 'W95'}
+    {#if $currentTheme == Themes.W95}
       <h1>
-        <img src={logo} alt="Rescribet" />
+        <img src={logoW95} alt="Rescribet" />
       </h1>
+    {:else if $currentTheme == Themes.Sticker}
+      <h1>
+        <img src={logoSicker} alt="rescribet" />
+      </h1>
+      <p class="subheader">writing is rewriting</p>
     {:else}
-      <h1>Rescribet</h1>
+      <h1>rescribet</h1>
       <p class="subheader">writing is rewriting</p>
     {/if}
   </div>
@@ -50,6 +56,10 @@
     width: 100%;
     margin-bottom: 6rem;
 
+    :global(.Bootstrap) & {
+      font-weight: 200;
+    }
+
     @media (min-width: 30em) {
       font-size: 6em;
     }
@@ -65,7 +75,7 @@
 
   .subheader {
     font-size: 2em;
-    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    font-family: var(--header-font);
     text-align: center;
     margin-bottom: 3em;
     width: 100%;
