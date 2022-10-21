@@ -45,9 +45,6 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-
-    position: absolute;
-    width: 100%;
   }
 
   .wrapper {

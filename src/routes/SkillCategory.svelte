@@ -23,24 +23,32 @@
 
   .skill-list {
     flex-grow: 1;
+    padding-left: 0.5em;
+
+    @media (min-width: 30em) {
+      padding-left: 2em;
+    }
   }
 
   .skill-item {
     font-family: var(--body-font);
     list-style: none;
-    padding-left: 0;
 
-    &::before {
+    &::marker {
       content: '✓';
       margin-right: 0.4em;
       color: green;
     }
 
-    :global(.W95) &::before {
-      content: '☑';
-      color: inherit;
-      font-size: 1.3em;
-      line-height: 1rem;
+    :global(.W95) & {
+      padding-left: 0.2em;
+
+      &::marker {
+        content: '☑';
+        color: inherit;
+        font-size: 1.3em;
+        line-height: 1rem;
+      }
     }
   }
 
@@ -60,7 +68,7 @@
 
     & .skill-list {
       background-color: white;
-      padding-left: 0.3em;
+      padding-left: 1em;
       margin: 0em;
     }
   }

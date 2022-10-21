@@ -48,11 +48,13 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--header-font);
 }
 
-app {
+.app {
   font-family: var(--body-font);
+  width: 100%;
 }
 
 body {
+  display: flex;
 	scrollbar-gutter: stable both-edges;
 	overflow-y: scroll;
 	min-height: 100vh;
