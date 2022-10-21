@@ -29,11 +29,23 @@
 <style lang="scss">
   .Stories {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 2fr));
+    grid-template-columns: repeat(auto-fit, minmax(13em, 2fr));
     gap: 1em;
 
     :global(.Sticker) & {
       gap: 2em;
+    }
+
+    @media (min-width: 30em) {
+      grid-template-columns: repeat(auto-fit, minmax(15em, 2fr));
+    }
+
+    @media (min-width: 40em) {
+      grid-template-columns: repeat(auto-fit, minmax(15em, 2fr));
+    }
+
+    @media (min-width: 60em) {
+      grid-template-columns: repeat(auto-fit, minmax(25em, 2fr));
     }
   }
 </style>
