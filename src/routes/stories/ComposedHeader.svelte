@@ -56,5 +56,9 @@
     :global(.Bootstrap) & {
       font-size: 4em;
     }
+
+    :global(.W95) & {
+      color: white;
+    }
   }
 </style>
