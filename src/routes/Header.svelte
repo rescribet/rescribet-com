@@ -1,15 +1,18 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import Socials from '$lib/socials.svelte';
-  import { currentTheme, themeClass, Themes } from '$lib/theme';
-
+  import { audio, currentTheme, themeClass, Themes } from '$lib/theme';
   import { stories } from '$lib/stories';
 
-  let pop: HTMLAudioElement;
+  let swoosh: HTMLAudioElement;
 
   const playPop = (_: unknown) => {
+    if (!$audio) {
+      return;
+    }
+
     if ($currentTheme === 'W95') {
-      pop.play();
+      swoosh.play();
     }
   };
 </script>
@@ -32,7 +35,10 @@
 </header>
 
 {#if $currentTheme === Themes.W95}
-  <audio src="/themes/{themeClass($currentTheme).toLowerCase()}/tab-switch.mp3" bind:this={pop} />
+  <audio
+    src="/themes/{themeClass($currentTheme).toLowerCase()}/tab-switch.mp3"
+    bind:this={swoosh}
+  />
 {/if}
 
 <style lang="scss">

@@ -1,7 +1,6 @@
 <script lang="ts">
   import Button from '$lib/components/Button.svelte';
-  import { currentTheme, themeClass, Themes } from '$lib/theme';
-  import { onMount } from 'svelte';
+  import { audio, currentTheme, themeClass, Themes } from '$lib/theme';
   import { scale } from 'svelte/transition';
   import { derived } from 'svelte/store';
 
@@ -14,25 +13,25 @@
 
   const randomIntFromInterval = (min: number, max: number) => Math.random() * (max - min + 1) + min;
 
-  onMount(() => {
-    if ($currentTheme == 'Sticker') {
-      pop.playbackRate = randomIntFromInterval(0.9, 1.1);
-      // @ts-ignore
-      pop.webkitPreservesPitch = false;
-      pop.preservesPitch = false;
-    }
-  });
-
   const onHover = () => {
+    if (!$audio) {
+      return;
+    }
+
     var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
     if (isSafari) {
-      pop.fastSeek(0);
       let cloned = pop.cloneNode(true) as HTMLAudioElement;
+      cloned.fastSeek(0);
       cloned.playbackRate = randomIntFromInterval(0.9, 1.1);
       // @ts-ignore
       cloned.webkitPreservesPitch = false;
       cloned.play();
     } else {
+      pop.playbackRate = randomIntFromInterval(0.9, 1.1);
+      // @ts-ignore
+      pop.webkitPreservesPitch = false;
+      pop.preservesPitch = false;
+      pop.volume = 0.2;
       pop.play();
     }
   };

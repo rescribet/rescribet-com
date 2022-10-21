@@ -1,4 +1,7 @@
 import { derived, writable, type Writable } from 'svelte/store';
+import { persistedWritable } from './persistedWritable';
+
+export const audio = persistedWritable('audio-enabled', false);
 
 export type ThemeNames = 'W95' | 'Bootstrap' | 'Sticker';
 
